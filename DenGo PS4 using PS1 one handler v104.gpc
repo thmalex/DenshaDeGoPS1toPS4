@@ -1,0 +1,291 @@
+#pragma METAINFO("DenGo PS1 to PS4", 1, 4, "<for PS1 DenGo One Handler by THM >")
+#include "DenGoPS1-Core.gph"
+#include <display.gph>
+
+/* Program inspired by Ethernity Lam
+   What you need:
+   Titan Two gamepad programmer.
+   A generic Playstation 2 to USB gamepad converter.
+   
+   Work with both PS1 Densya De Go! 1 or 2 "Two Handler" and "One Handler" Controller.
+   One code work with Series 103 and non-Series 103 trains.
+   
+   Five Demands No One Less
+   Glory to Hong Kong
+*/
+
+bool series103 = FALSE;
+
+combo handleStick {
+	/*****************************
+	  Process Notch Convert
+	******************************/
+	
+	bool btn4 = is_active(BUTTON_4);
+    bool btn5 = is_active(BUTTON_5);
+    bool btn7 = is_active(BUTTON_7);
+	bool btn8 = is_active(BUTTON_8);
+    bool btn17 = is_active(BUTTON_17);
+	fix32 btnL_value; 
+	bool btnL; 
+	bool btnR;
+	int lastStatus;
+	bool breaking = FALSE;
+	
+	
+	btnL_value = get_actual(STICK_2_X);
+	if (btnL_value <= -10.0) {
+		btnL = TRUE;
+		btnR = FALSE;
+	} else if (btnL_value >= 10.0) {
+		btnL = FALSE;
+		btnR = TRUE;
+	} else {
+		btnL = FALSE;
+		btnR = FALSE;
+	}
+		
+    if (!btn4 && btn5 && btn7 && !btn8 && !btn17 && !btnL && !btnR) {
+		// B8 
+        lastLY = -100.0; 
+		lastBreakRX = 100.0;
+		lastL2 = 0.0;
+		lastStatus = -8;
+		breaking = TRUE;
+		display_overlay(_h_,10);
+	} else if (!btn4 && btn5 && btn7 && btn8 && !btn17 && !btnL && !btnR) {
+		//B7
+		lastLY = -90.0; 
+        lastBreakRX = 90.0;
+		lastL2 = 0.0;
+		lastStatus = -7;
+		breaking = TRUE;
+		display_overlay(_g_,10);
+    } else if (btn4 &&!btn5 && !btn7 && !btn8 && !btn17 && !btnL && !btnR) {
+		//B6 
+		lastLY = -80.0; 
+		lastBreakRX = 80.0;
+		lastL2 = 0.0;
+		lastStatus = -6;
+		breaking = TRUE;
+		display_overlay(_F_,10);
+    } else if (btn4 && !btn5 && !btn7 && btn8 && !btn17 && !btnL && !btnR) {
+		//B5 
+        lastLY = -70.0; 
+        lastBreakRX = 70.0;
+		lastL2 = 0.0;
+		lastStatus = -5;
+		breaking = TRUE;
+		display_overlay(_e_,10);
+    } else if (btn4 && !btn5 && btn7 && !btn8 && !btn17 && !btnL && !btnR) {
+		//B4
+        lastLY = -60.0; 
+        lastBreakRX = 60.0;
+		lastL2 = 0.0;
+		lastStatus = -4;
+		breaking = TRUE;
+		display_overlay(_d_,10);
+    } else if (btn4 && !btn5 && btn7 && btn8 && !btn17 && !btnL && !btnR) {
+		//B3
+        lastLY = -50.0; 
+        lastBreakRX = 50.0;
+		lastL2 = 0.0;
+		lastStatus = -3;
+		breaking = TRUE;
+		display_overlay(_C_,10);
+    } else if (btn4 && btn5 && !btn7 && !btn8 && !btn17 && !btnL && !btnR) {
+		//B2      		
+        lastLY = -40.0; 
+        lastBreakRX = 40.0;
+		lastL2 = 0.0;
+		lastStatus = -2;
+		breaking = TRUE;
+		display_overlay(_b_,10);
+    } else if (btn4 && btn5 && !btn7 && btn8 && !btn17 && !btnL && !btnR) {
+		//B1
+		lastLY = -30.0; 
+        lastBreakRX = 30.0;
+		lastL2 = 0.0;
+		lastStatus = -1;
+		breaking = TRUE;
+		display_overlay(_A_,10);
+    } else if (btn4 && btn5 && btn7 && !btn8 &&btn17 && btnR && !breaking) {
+		//P1 
+		if (series103){
+			lastLX = -30.0;
+			lastLY = 0.0;
+		} else {
+			lastLX = 0.0;
+			lastLY = 30.0; 
+		}
+        lastBreakRX = 0.0;
+		lastL2 = 0.0;
+		lastStatus = 1;
+		display_overlay(_1_,10);
+    } else if (btn4 && btn5 && btn7 && !btn8 && !btn17 && btnR  && !breaking) {
+		//P2
+		if (series103){
+			lastLX = -50.0;
+			lastLY = 0.0;
+		} else {
+			lastLX = 0.0;
+			lastLY = 50.0; 
+		}
+        lastBreakRX = 0.0;
+		lastL2 = 0.0;
+		lastStatus = 2;
+		display_overlay(_2_,10);
+    } else if (btn4 && btn5 && btn7 && !btn8 && btn17 && btnL && !breaking) {
+		//P3
+		if (series103){
+			lastLX = -70.0;
+			lastLY = 0.0;
+		} else {
+			lastLX = 0.0;
+			lastLY = 70.0; 
+		}
+        lastBreakRX = 0.0;
+		lastL2 = 0.0;
+		lastStatus = 3;
+		display_overlay(_3_,10);
+    } else if (btn4 && btn5 && btn7 && !btn8 && !btn17 && btnL && !breaking) {
+		//P4 
+		if (series103){
+			lastLX = -90.0;
+			lastLY = 0.0;
+		} else {
+			lastLX = 0.0;
+			lastLY = 90.0; 
+		}
+        lastBreakRX = 0.0;
+		lastL2 = 0.0;
+		lastStatus = 4;
+		display_overlay(_4_,10);
+    } else if (btn4 && btn5 && btn7 && !btn8 && btn17 && !btnL && !btnR && !breaking) {
+		//P5
+		if (series103){
+			lastLX = -100.0;
+			lastLY = 0.0;
+		} else {
+			lastLX = 0.0;
+			lastLY = 100.0; 
+		}
+        lastBreakRX = 0.0;
+		lastL2 = 0.0;
+		lastStatus = 5;
+		display_overlay(_5_,10);
+    } else if ((!btn4 && !btn5 && btn7 && !btn8 && !btn17 && !btnL && !btnR) | (!btn4 && btn5 && !btn7 && btn8 && !btn17 && !btnL && !btnR)){ 
+		// EB
+		lastLX = 0.0;
+        lastLY = -100.0; 
+        lastBreakRX = 100.0;
+		lastL2 = 100.0;
+		lastStatus = -9;
+		breaking = TRUE;
+		display_overlay(_E_,10);
+    } else if (btn4 && btn5 && btn7 && btn8 && !btn17 && !btnL && !btnR) {
+		if (lastStatus == -9){ 
+			lastL2 = 100.0;
+			lastLY = -100.0; 
+			lastBreakRX = 100.0;
+			breaking = TRUE;
+			display_overlay(_E_,10);
+		}  else {
+			lastL2 = 0.0;
+		}
+	} else if (!btn4 && !btn5 && !btn7 && !btn8 && !btn17 && !btnL && !btnR) {
+		if (lastStatus == -9){ 
+			lastL2 = 100.0;
+			lastLY = -100.0; 
+			lastBreakRX = 100.0;
+			breaking = TRUE;
+			display_overlay(_E_,10);
+		}  else {
+			lastL2 = 0.0;
+			set_val(PS4_LY, PS4_LY);
+		}
+	}  else if (btn4 && btn5 && btn7 && !btn8 && !btn17 && !btnL && !btnR) {
+		//N 
+		if ((lastStatus == 1) | (lastStatus == -1)) {
+			lastLX = 0.0;
+			lastLY = 0.0; 
+			lastBreakRX = 0.0;
+			lastL2 = 0.0;
+			set_val(PS4_LX, 0.0);
+			lastStatus = 0;
+			if ((lastLY) == 100.0) {
+				lastLY = 0.0;
+			}
+			breaking = FALSE;
+			display_overlay(_0_,10);
+		} else {
+			lastLX = lastLX;
+			lastLY = lastLY;
+			lastBreakRX = 0.0;
+			lastL2 = 0.0;
+			set_val(PS4_LX, 0.0);
+			lastStatus = lastStatus;
+			if ((lastLY) == 100.0) {
+				lastLY = 0.0;
+			}
+			breaking = FALSE;
+			display_overlay(_0_,10);
+		}
+	}
+	
+	
+	set_val(PS4_L1, 0.0);
+	set_val(PS4_R1, 0.0);
+	set_val(PS4_R2, 0.0);
+	set_val(PS4_LY, lastLY);
+    set_val(PS4_LX, lastLX);
+    set_val(PS4_RX, lastBreakRX);
+	set_val(PS4_L2, lastL2);
+	
+}
+
+combo typeChange {
+	bool btn2  = is_active(BUTTON_2);
+	bool btn3  = is_active(BUTTON_3);
+	bool btn14 = is_active(BUTTON_14);
+	bool btn15 = is_active(BUTTON_15);
+	bool btn16 = is_active(BUTTON_16);
+	
+	if (btn2 && btn3 && btn14 && btn15 && btn16) {
+		if (series103 == FALSE) {
+			series103 = TRUE; //Series 103, Titan LED Blue
+			led_set(LED_1, 100.0, 0);
+			led_set(LED_2, 0.0, 0);
+			led_set(LED_3, 0.0, 0);
+			led_set(LED_4, 0.0, 0);
+		} else {
+			series103 = FALSE; //Other Trains, Titan LED Green
+			led_set(LED_1, 0.0, 0);
+			led_set(LED_2, 0.0, 0);
+			led_set(LED_3, 100.0, 0);
+			led_set(LED_4, 0.0, 0);			
+		}
+	}
+	wait(100);
+}
+
+init {
+	port_connect(PORT_USB_C, PROTOCOL_PS4); //The output is always in PS4 mode
+	
+	led_set(LED_1, 0.0, 0);
+    led_set(LED_2, 0.0, 0);
+    led_set(LED_3, 100.0, 0);
+    led_set(LED_4, 0.0, 0);
+}
+
+
+main {
+	combo_run(typeChange);
+	combo_run(handleStart);
+	combo_run(handleSelect);
+	combo_run(handleC);
+	combo_run(handleB);
+    combo_run(handleA);
+		  
+    combo_run(handleStick);
+}

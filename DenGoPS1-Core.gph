@@ -1,0 +1,69 @@
+#define PS4_RX          STICK_1_X
+#define PS4_RY          STICK_1_Y
+#define PS4_LY          STICK_2_Y
+#define PS4_LX          STICK_2_X
+#define PS4_L1          BUTTON_7
+#define PS4_L2          BUTTON_8
+#define PS4_R1          BUTTON_4
+#define PS4_R2          BUTTON_5
+#define PS4_TRIANGLE    BUTTON_14
+#define PS4_CIRCLE      BUTTON_15
+#define PS4_CROSS       BUTTON_16
+#define PS4_SQUARE      BUTTON_17
+#define PS4_OPTIONS     BUTTON_3
+#define PS4_TOUCH     	BUTTON_2
+
+fix32 lastL2;
+fix32 lastLY;
+fix32 lastLX;
+fix32 lastBreakRX;
+//bool lastOnOff;
+//uint32 pressingDownTime;
+//bool isPressingDown;
+//uint32 needPressDownAfterCount;
+//uint32 pressingUpTime;
+//bool isPressingUp;
+//uint32 needPressUpAfterCount;
+//fix32 lastUpDownPosition;
+
+combo handleC { //Button C => PS4 Circle
+    if (is_active(BUTTON_16)) {
+        set_val(PS4_CIRCLE, 100);
+		set_val(PS4_CROSS , 0);
+	} else if (is_release(BUTTON_16)) {
+        set_val(PS4_CIRCLE, 0);
+    }   
+}
+
+combo handleB { //Button B => PS4 Cross
+    if (is_active(BUTTON_15)) {
+        set_val(PS4_CROSS, 100);
+    } else if (is_release(BUTTON_16)) {
+        set_val(PS4_CROSS, 0);
+    }   
+}
+
+combo handleA { //Button A => PS4 Square
+    if (is_active(BUTTON_14)) {
+        set_val(PS4_SQUARE, 100);
+    } else if (is_release(BUTTON_16)) {
+        set_val(PS4_SQUARE, 0);
+    }   
+}
+
+combo handleSelect { //Button Select => PS4 Triangle
+    if (is_active(BUTTON_2)) {
+        set_val(PS4_TRIANGLE, 100);
+		set_val(PS4_TOUCH, 0);
+    } else if (is_release(BUTTON_2)) {
+        set_val(PS4_TRIANGLE, 0);
+    }   
+}
+combo handleStart { //Button Start => PS4 Options
+    if (is_active(BUTTON_3)) {
+        set_val(PS4_OPTIONS, 100);
+    } else if (is_release(BUTTON_3)) {
+        set_val(PS4_OPTIONS, 0);
+    }   
+}
+
