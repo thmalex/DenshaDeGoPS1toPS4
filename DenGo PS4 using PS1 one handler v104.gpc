@@ -22,10 +22,10 @@ combo handleStick {
 	******************************/
 	
 	bool btn4 = is_active(BUTTON_4);
-    bool btn5 = is_active(BUTTON_5);
-    bool btn7 = is_active(BUTTON_7);
+    	bool btn5 = is_active(BUTTON_5);
+   	bool btn7 = is_active(BUTTON_7);
 	bool btn8 = is_active(BUTTON_8);
-    bool btn17 = is_active(BUTTON_17);
+   	bool btn17 = is_active(BUTTON_17);
 	fix32 btnL_value; 
 	bool btnL; 
 	bool btnR;
@@ -238,8 +238,8 @@ combo handleStick {
 	set_val(PS4_R1, 0.0);
 	set_val(PS4_R2, 0.0);
 	set_val(PS4_LY, lastLY);
-    set_val(PS4_LX, lastLX);
-    set_val(PS4_RX, lastBreakRX);
+    	set_val(PS4_LX, lastLX);
+    	set_val(PS4_RX, lastBreakRX);
 	set_val(PS4_L2, lastL2);
 	
 }
@@ -285,7 +285,7 @@ main {
 	combo_run(handleSelect);
 	combo_run(handleC);
 	combo_run(handleB);
-    combo_run(handleA);
+    	combo_run(handleA);
 		  
-    combo_run(handleStick);
+    	combo_run(handleStick);
 }
