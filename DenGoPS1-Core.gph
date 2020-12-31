@@ -1,3 +1,9 @@
+/* Version 1.05 by THM inspired by Ethernity Lam
+   80's Retro Games https://fb.com/1980.games or https://1980.games
+   
+   Five Demands No One Less
+   Glory to Hong Kong
+*/
 #define PS4_RX          STICK_1_X
 #define PS4_RY          STICK_1_Y
 #define PS4_LY          STICK_2_Y
@@ -29,7 +35,6 @@ fix32 lastBreakRX;
 combo handleC { //Button C => PS4 Circle
     if (is_active(BUTTON_16)) {
         set_val(PS4_CIRCLE, 100);
-		set_val(PS4_CROSS , 0);
 	} else if (is_release(BUTTON_16)) {
         set_val(PS4_CIRCLE, 0);
     }   
@@ -38,25 +43,25 @@ combo handleC { //Button C => PS4 Circle
 combo handleB { //Button B => PS4 Cross
     if (is_active(BUTTON_15)) {
         set_val(PS4_CROSS, 100);
-    } else if (is_release(BUTTON_16)) {
+    } else if (is_release(BUTTON_15)) {
         set_val(PS4_CROSS, 0);
     }   
 }
 
-combo handleA { //Button A => PS4 Square
+combo handleA { //Button A => PS4 Triangle
     if (is_active(BUTTON_14)) {
-        set_val(PS4_SQUARE, 100);
-    } else if (is_release(BUTTON_16)) {
-        set_val(PS4_SQUARE, 0);
+        set_val(PS4_TRIANGLE, 100);
+    } else if (is_release(BUTTON_14)) {
+        set_val(PS4_TRIANGLE, 0);
     }   
 }
 
-combo handleSelect { //Button Select => PS4 Triangle
+combo handleSelect { //Button Select => PS4 SQUARE
     if (is_active(BUTTON_2)) {
-        set_val(PS4_TRIANGLE, 100);
-		set_val(PS4_TOUCH, 0);
+        set_val(PS4_SQUARE, 100);
+		set_val(PS4_TOUCH,  0);
     } else if (is_release(BUTTON_2)) {
-        set_val(PS4_TRIANGLE, 0);
+        set_val(PS4_SQUARE, 0);
     }   
 }
 combo handleStart { //Button Start => PS4 Options
