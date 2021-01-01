@@ -14,7 +14,7 @@ What you need.
 2. A generic Playstation 2 to USB gamepad adapter.
 3. A PS4 gamepad, of course.
 
-Button mapping:
+Button mapping: (Since ver 1.05)
 
 Please set the driving mode as analog driving mode in game options.
 1. SELECT Button => PS4 SQUARE   (Windscreen wiper)
